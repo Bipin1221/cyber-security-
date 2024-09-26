@@ -69,12 +69,12 @@ python packet_sniffer.py
 python packet_sniffer.py
 ```
 
-# 5. DNS Spoofing Tool
+### 5. DNS Spoofing Tool
 
-## Description
+#### Description
 This tool intercepts DNS requests and spoofs DNS responses, redirecting the target to a specified IP address for a given domain.
 
-## Usage
+#### Usage
 Run the tool using the following command:
 
 ```bash
@@ -84,11 +84,11 @@ sudo python3 dnsspoof.py -w <website> -i <spoof_ip>
 ```bash
 sudo python3 dnsspoof.py -w example.com -i 192.168.1.100
 ```
-##Install dependencies:
+#### Install dependencies:
 ```bash
 pip install netfilterqueue
 ```
-##Notes
+#### Notes
 -Use iptables to redirect DNS requests to the Netfilter queue:
 ```bash
 sudo iptables -I FORWARD -j NFQUEUE --queue-num 0
