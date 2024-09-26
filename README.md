@@ -89,11 +89,11 @@ sudo python3 dnsspoof.py -w example.com -i 192.168.1.100
 pip install netfilterqueue
 ```
 #### Notes
--Use iptables to redirect DNS requests to the Netfilter queue:
+Use iptables to redirect DNS requests to the Netfilter queue:
 ```bash
 sudo iptables -I FORWARD -j NFQUEUE --queue-num 0
 ```
--Clear iptables after use
+Clear iptables after use
 ```bash
 sudo iptables --flush
 ```
