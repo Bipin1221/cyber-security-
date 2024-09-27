@@ -30,7 +30,7 @@ def process_packet(packet):
             del scapy_packet[scapy.UDP].chksum
             print(scapy_packet.show())
             packet.set_payload(bytes(scapy_packet))  # Set the modified packet payload
-        packet.accept()  # Accept the packet
+    packet.accept()  # Accept the packet
 options = get_argument()
 queue = netfilterqueue.NetfilterQueue()
 queue.bind(0, process_packet)
