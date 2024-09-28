@@ -27,9 +27,11 @@ def process_packet(packet):
 
             del scapy_packet[scapy.IP].len
             del scapy_packet[scapy.IP].chksum
+<<<<<<< HEAD
         #     #del scapy_packet[scapy.UDP].len
         #     #del scapy_packet[scapy.UDP].chksum
         #     print(scapy_packet.show())
+>>>>>>> 40b399f34ac2d853b184a2fda6b50b86f25d777c
             packet.set_payload(bytes(scapy_packet))  # Set the modified packet payload
     packet.accept()  # Accept the packet
 options = get_argument()
