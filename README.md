@@ -125,13 +125,50 @@ Clear iptables after use
 ```bash
 sudo iptables --flush
 ```
+# 7. Packet Injection Tool
 
+## Description
 
+This tool allows for packet injection into HTTP responses using Python, `scapy`, and `netfilterqueue`. It intercepts network traffic and modifies the payload to inject custom code.
 
+## Prerequisites
 
+- **Python 3.x**
+- **Scapy**: Install with `pip install scapy`
+- **NetfilterQueue**: Install with `pip install netfilterqueue`
 
+## Installation
 
+1. Ensure you have the necessary Python libraries installed.
+2. Save the provided packet injection code in a file (e.g., `injector.py`).
 
+## Usage
+
+### Running the Script
+
+Run the script with root privileges, specifying the injection code:
+
+```bash
+sudo python injector.py -c "<script>Your Injection Code Here</script>"
+```
+#### Example:
+```bash
+sudo python injector.py -c "<script>alert('Hello, World!');</script>"
+
+```
+#### Install dependencies:
+```bash
+pip install netfilterqueue
+```
+#### Notes
+Use iptables to redirect DNS requests to the Netfilter queue:
+```bash
+sudo iptables -I FORWARD -p tcp --dport 80 -j NFQUEUE --queue-num 0
+```
+Clear iptables after use
+```bash
+sudo iptables --flush
+```
 ## Conclusion
 This collection of network utilities provides essential tools for network analysis and security testing. Use them responsibly and in accordance with legal and ethical guidelines.
 
