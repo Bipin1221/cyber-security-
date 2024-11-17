@@ -6,7 +6,7 @@ def sniff(interface):
 
 def process_packet_sniff(packet):
     if packet.haslayer(scapy.ARP) and packet[scapy.ARP].op==2:
-        print(packet.show())
+        #print(packet.show())
         try:
             real_mac = get_mac(packet[scapy.ARP].psrc)
             response_mac = packet[scapy.ARP].hwsrc
