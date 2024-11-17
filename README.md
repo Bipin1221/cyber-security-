@@ -169,6 +169,22 @@ Clear iptables after use
 ```bash
 sudo iptables --flush
 ```
+
+# 8.ARP Spoof Detector
+## Description
+This Python tool detects ARP spoofing attacks on your local network. It listens for ARP packets and alerts you if a device is sending fake ARP replies, potentially indicating an ARP poisoning attack.
+
+## Usage
+To run the ARP Spoof Detector on your network interface:
+
+```bash
+python arpspoof_detector.py
+```
+### Example:
+Run the script on wlan0 (or your network interface):
+```bash
+python arpspoof_detector.py
+```
 ## Conclusion
 This collection of network utilities provides essential tools for network analysis and security testing. Use them responsibly and in accordance with legal and ethical guidelines.
 
